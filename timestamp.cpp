@@ -44,6 +44,10 @@ struct TimerClass {
         std::cout << "Duration in us " << duration_cast<microseconds>( life ).count() << std::endl;
     }
 
+    TimerClass(const TimerClass& other) : m_start(other.m_start) {
+        
+    }
+
 private:
     std::chrono::steady_clock::time_point m_start;
 };
