@@ -48,6 +48,17 @@ struct TimerClass {
         
     }
 
+    TimerClass(TimerClass&& other) noexcept : m_start(other.m_start) {
+        other.m_start = std::chrono::steady_clock::now();
+    }
+
+    TimerClass& operator=(TimerClass&& other) noexcept {
+        if (this == &other) return *this;
+        m_start = other.m_start;
+        other.m_start = std::chrono::steady_clock::now();
+        return *this;
+    }
+
 private:
     std::chrono::steady_clock::time_point m_start;
 };
@@ -59,6 +70,7 @@ int main()
     {
         TimerClass t_2;
         TimerClass t_2_copy(t_2);
+        t_2 = std::move(t);
 
         std::this_thread::sleep_for( std::chrono::seconds(1));
     }
