@@ -33,9 +33,11 @@
 #include <thread>
 
 struct TimerClass {
-    TimerClass() 
+    TimerClass(const char* name) 
         :   m_start (std::chrono::steady_clock::now())
-    {}
+    {
+        printf("%s:\n", name);
+    }
 
     ~TimerClass() {
         using namespace std::chrono;
@@ -65,10 +67,10 @@ private:
 
 int main()
 {
-    TimerClass t;
+    TimerClass t("First Timer");
     TimerClass t_copy(t);
     {
-        TimerClass t_2;
+        TimerClass t_2("Second Timer");
         TimerClass t_2_copy(t_2);
         t_2 = std::move(t);
 
