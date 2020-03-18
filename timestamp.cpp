@@ -55,9 +55,10 @@ private:
 int main()
 {
     TimerClass t;
-
+    TimerClass t_copy(t);
     {
         TimerClass t_2;
+        TimerClass t_2_copy(t_2);
 
         std::this_thread::sleep_for( std::chrono::seconds(1));
     }
